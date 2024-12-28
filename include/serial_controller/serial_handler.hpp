@@ -22,6 +22,7 @@ namespace serial_controller
         bool OpenPort(std::string port_path);
         void ClosePort();
         bool WritePort(std::string tx);
+        std::string ReadPort();
 
         private:
         int fd_;

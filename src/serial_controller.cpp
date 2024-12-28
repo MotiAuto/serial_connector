@@ -6,10 +6,10 @@ namespace serial_controller
     {
         sub_ = this->create_subscription<std_msgs::msg::Int64MultiArray>(
             "/to_pico", 
-            0, 
+            rclcpp::SystemDefaultsQoS(), 
             std::bind(&SerialController::topic_callback, this, _1));
 
-        timer_ = this->create_wall_timer(100ms, std::bind(&SerialController::timer_callback, this));
+        timer_ = this->create_wall_timer(20ms, std::bind(&SerialController::timer_callback, this));
 
         this->declare_parameter("port_path", "/dev/ttyACM0");
         this->get_parameter("port_path", port_path_param);
@@ -49,6 +49,8 @@ namespace serial_controller
             if(err)
             {
                 // RCLCPP_INFO(this->get_logger(), "Write %s", tx.c_str());
+                auto read_str = serial->ReadPort();
+                RCLCPP_INFO(this->get_logger(), "%s", read_str.c_str());
             }
             else
             {

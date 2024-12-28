@@ -55,4 +55,26 @@ namespace serial_controller
             return false;
         }
     }
+
+    std::string SerialHandler::ReadPort()
+    {
+        if(fd_ < 0)
+        {
+            return std::string("Read ERROR");
+        }
+        char buf[100];
+
+        ssize_t bytes_read = read(fd_, buf, sizeof(buf));
+
+        if(bytes_read < 0)
+        {
+            return std::string("Read ERROR");
+        }
+        else
+        {
+            buf[bytes_read] = '\0';
+            
+            return std::string(buf);
+        }
+    }
 }
