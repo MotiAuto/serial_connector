@@ -33,7 +33,7 @@ namespace serial_controller
 
     void SerialController::topic_callback(const std_msgs::msg::Int64MultiArray::SharedPtr msg)
     {
-        std::string str = std::to_string(msg->data[0]+300) + ',' + std::to_string(msg->data[1]+300) + ',' + std::to_string(msg->data[2]+300) + ',' + std::to_string(300) + 'e';
+        std::string str = std::to_string(msg->data[0]+1500) + ',' + std::to_string(msg->data[1]+1500) + ',' + std::to_string(msg->data[2]+1500) + 'e';
 
         tx = str;
 
